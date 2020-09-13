@@ -42,14 +42,13 @@ func commit(message string) {
 	}
 }
 
-func push() {
+func push() ([]byte, error) {
 	command := []string{"push"}
 	out, err := runCmd(command)
 	if err != nil {
 		errCmd(command, err)
 	}
-	fmt.Println(out)
-	fmt.Println("Pushing: Ok")
+	return out, err
 }
 
 func isDiverged() bool {
@@ -63,8 +62,8 @@ func isDiverged() bool {
 		return false
 	}
 
-	fmt.Printf("LOCAL *HEAD REF: %v \n ", string(local))
-	fmt.Printf("REMOTE *HEAD REF: %v \n ", string(remote))
+	fmt.Printf("LOCAL *HEAD REF: %v\n ", string(local))
+	fmt.Printf("REMOTE *HEAD REF: %v\n ", string(remote))
 	return true
 }
 
@@ -103,13 +102,12 @@ func getOptions() (payload []string) {
 	return payload
 }
 
-func runCmd(commands []string) (stdout []byte, err error) {
-	var cmd = "git"
-	stdout, err = exec.Command(cmd, commands...).Output()
+func runCmd(commands []string) ([]byte, error) {
+	out, err := exec.Command("git", commands...).Output()
 	if err != nil {
-		return stdout, err
+		return out, err
 	}
-	return stdout, err
+	return out, err
 }
 
 func errCmd(command []string, err error) error {

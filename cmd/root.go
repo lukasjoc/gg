@@ -73,12 +73,15 @@ func commitStuff() string {
 		}
 		survey.AskOne(prompt, &message)
 		commit(message)
-		push()
+		pushOut, _ := push()
+		fmt.Println(string(pushOut))
 		return status()
 	}
 	prompt := &survey.Multiline{Message: "Please provide a good commit message in simple present!"}
 	survey.AskOne(prompt, &message)
 	commit(message)
-	push()
+	pushOut, _ := push()
+	fmt.Println(string(pushOut))
+
 	return status()
 }
