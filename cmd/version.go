@@ -21,7 +21,7 @@ var versionCmd = &cobra.Command{
 
 func printBuildContext() {
 	var (
-		version    = "gg0.10"
+		version    = "gg0.11"
 		gitVersion []byte
 		goVersion  []byte
 		kernel     []byte
