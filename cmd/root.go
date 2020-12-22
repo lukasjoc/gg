@@ -35,11 +35,11 @@ var rootCmd = &cobra.Command{
 			if selected == true {
 				payload := []string{}
 				prompt := &survey.MultiSelect{
-					Message:  "Select payload wisely! (What you select here shall be committed!)",
+					Message:  "Select payload wisely! (What you select here shall be pushed!)",
 					Options:  getOptions(),
 					PageSize: 15,
 				}
-				survey.AskOne(prompt, &payload)
+				survey.AskOne(prompt, &payload, survey.WithKeepFilter(true))
 				addSelected(payload)
 				status := commitStuff()
 				fmt.Println(status)
@@ -71,14 +71,14 @@ func commitStuff() string {
 			FileName: "commit_message.txt",
 			Editor:   os.Getenv("EDITOR"),
 		}
-		survey.AskOne(prompt, &message)
+		survey.AskOne(prompt, &message, survey.WithKeepFilter(true))
 		commit(message)
 		pushOut, _ := push()
 		fmt.Println(string(pushOut))
 		return status()
 	}
 	prompt := &survey.Multiline{Message: "Please provide a good commit message in simple present!"}
-	survey.AskOne(prompt, &message)
+	survey.AskOne(prompt, &message, survey.WithKeepFilter(true))
 	commit(message)
 	pushOut, _ := push()
 	fmt.Println(string(pushOut))
