@@ -23,7 +23,7 @@ var rootCmd = &cobra.Command{
 	Use:   "gg",
 	Short: "Add, Commit, Push be happy with gg",
 	Long: `Shell promt to add, commit, and push your amazing stuff to 
-	git version controll without typos and faster. I swear. `,
+	git version control without typos and faster. I swear. (^_^)`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		if !isRepo() {
